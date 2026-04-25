@@ -1,0 +1,20 @@
+{
+  "name": "contgenerator",
+  "version": "1.0.0",
+  "description": "Antigravity Content Swarm core library and parser",
+  "main": "src/parser.js",
+  "bin": {
+    "contgenerator": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "content",
+    "generator",
+    "ai",
+    "antigravity"
+  ],
+  "author": "",
+  "license": "ISC"
+}
