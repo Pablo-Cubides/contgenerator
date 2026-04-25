@@ -11,7 +11,7 @@ Para iniciar la misión, escribe: `"Ejecuta la misión de gestión de contenidos
 **Objetivo:** Identificar tendencias y proponer temas sustentados con datos SEO reales.
 
 1. **Investigación Profesional:** Utiliza el comando `npx contgenerator analyze "keyword"` para obtener datos de Google Autocomplete, Intención de Búsqueda y Dificultad basada en SERP (Scraping gratuito).
-2. **NotebookLM Check:** Cruza las tendencias con el Notebook asociado (ID: `{{NOTEBOOK_ID}}`) usando `notebook_query`.
+2. **NotebookLM Check:** Cruza las tendencias con el Notebook asociado (ID: `YOUR_NOTEBOOK_ID_HERE`) usando `notebook_query`.
 3. **Análisis de Competencia:** Revisa los reportes JSON generados en `docs/analysis-*.json` para entender qué está posicionando y cómo superarlo.
 4. **Propuesta:** Crea un archivo llamado `docs/content-plan-[DATE].md` basándote en el template de `content-plan-template.md`.
 5. **🛑 STOP:** Presenta las propuestas al usuario y espera aprobación explícita.
@@ -23,7 +23,7 @@ Para iniciar la misión, escribe: `"Ejecuta la misión de gestión de contenidos
 
 Para cada artículo aprobado en el plan:
 1. **Extracción LSI:** Genera una lista de 15 a 20 palabras clave secundarias (LSI/NLP) que deben estar presentes en el texto de forma natural.
-2. **Redacción y Frontmatter:** Crea el archivo en el directorio correspondiente (`{{CONTENT_DIR}}/[categoria]/slug-del-articulo.md`). 
+2. **Redacción y Frontmatter:** Crea el archivo en el directorio correspondiente (`public/blog/[categoria]/slug-del-articulo.md`). 
 3. **Validación Autónoma:** Asegúrate de que los metadatos cumplen estrictamente con las longitudes para que el Parser no falle.
 
 ---

@@ -1,0 +1,11 @@
+1. Un test generico
+Keyword Principal: prueba-generica
+
+Introducción
+Este es un parrafo de prueba generica que tiene algunas palabras para ver si el contador de palabras y el formateo de tiempo funciona adecuadamente en este generador super avanzado sin ataduras. 
+
+1. El formato de listas
+Esto tiene que pasar.
+
+CTA
+Dale click!
