@@ -9,6 +9,7 @@
 - **Categoría destino:**
 - **Enfoque/Ángulo SEO:**
 - **Justificación (datos/tendencia):**
+- **Fuentes de Autoridad a citar:**
 
 ## Propuesta 2
 - **Tema:**
@@ -19,6 +20,7 @@
 - **Categoría destino:**
 - **Enfoque/Ángulo SEO:**
 - **Justificación (datos/tendencia):**
+- **Fuentes de Autoridad a citar:**
 
 ## Aprobación
 - [ ] Aprobado por el usuario

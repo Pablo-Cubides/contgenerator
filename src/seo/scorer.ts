@@ -12,13 +12,14 @@ export interface SeoScore {
     lsi: number;
     internalLinks: number;
     readability: number;
+    externalSources: number;
   };
   issues: string[];
   suggestions: string[];
 }
 
 export function scoreArticle(article: any): SeoScore {
-  const { title, keyword, meta_description, content, wordCount, categorySlug } = article;
+  const { title, keyword, meta_description, content, wordCount, categorySlug, sources = [] } = article;
   const body = content.toLowerCase();
   const kw = keyword.toLowerCase();
   
@@ -33,7 +34,8 @@ export function scoreArticle(article: any): SeoScore {
     density: 0,
     lsi: 0,
     internalLinks: 0,
-    readability: 0
+    readability: 0,
+    externalSources: 0
   };
 
   // 1. Title (15%)
@@ -62,15 +64,15 @@ export function scoreArticle(article: any): SeoScore {
   if (h2Count >= 2) breakdown.headings += 5;
   else suggestions.push("Usa al menos dos subtítulos H2");
 
-  // 5. Word Count (10%)
-  if (wordCount >= 800) breakdown.wordCount = 10;
-  else if (wordCount >= 500) breakdown.wordCount = 5;
+  // 5. Word Count (5%)
+  if (wordCount >= 800) breakdown.wordCount = 5;
+  else if (wordCount >= 500) breakdown.wordCount = 3;
   else issues.push("Contenido muy corto (< 500 palabras)");
 
-  // 6. Density (10%)
+  // 6. Density (5%)
   const kwCount = (body.match(new RegExp(kw, 'g')) || []).length;
   const density = (kwCount / wordCount) * 100;
-  if (density >= 0.5 && density <= 2.5) breakdown.density = 10;
+  if (density >= 0.5 && density <= 2.5) breakdown.density = 5;
   else if (density > 2.5) issues.push(`Densidad de keyword alta (${density.toFixed(2)}%)`);
   else suggestions.push("Aumenta la densidad de la keyword principal");
 
@@ -79,10 +81,21 @@ export function scoreArticle(article: any): SeoScore {
   if (linkMatches.length >= 1) breakdown.internalLinks = 10;
   else suggestions.push("Añade al menos un enlace interno");
 
+  // 8. External Sources (10%) - E-E-A-T
+  if (sources.length >= 2) breakdown.externalSources = 10;
+  else if (sources.length === 1) breakdown.externalSources = 5;
+  else issues.push("Faltan fuentes de autoridad (E-E-A-T)");
+
   // 8. Readability (15%)
   const read = calculateReadability(content);
   breakdown.readability = Math.round((read.score / 100) * 15);
   if (read.score < 50) issues.push(`Legibilidad baja (${read.score}): ${read.level}`);
+
+  // 9. External Sources (E-E-A-T) (10%)
+  const sources = article.sources || [];
+  if (sources.length >= 2) breakdown.externalSources = 10;
+  else if (sources.length === 1) breakdown.externalSources = 5;
+  else issues.push("Faltan fuentes de autoridad (E-E-A-T)");
 
   // Calculate Total
   const total = Object.values(breakdown).reduce((a, b) => a + b, 0);

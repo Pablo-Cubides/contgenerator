@@ -13,7 +13,8 @@ const ArticleSchema = z.object({
   volume: z.number().optional(),
   kd: z.number().optional(),
   intent: z.string().optional(),
-  image: z.string().optional()
+  image: z.string().optional(),
+  sources: z.array(z.string().url()).optional()
 });
 
 type ArticleData = z.infer<typeof ArticleSchema>;
@@ -61,7 +62,8 @@ export function parseMarkdownFile(filePath: string, categoryName: string = "Gene
     category: categoryName,
     categorySlug,
     date: new Date().toISOString().split("T")[0],
-    image
+    image,
+    sources: parsedData.sources || []
   };
 
   // NEW: Calculate SEO Score and detect internal links

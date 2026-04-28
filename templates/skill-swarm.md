@@ -13,8 +13,9 @@ Para iniciar la misión, escribe: `"Ejecuta la misión de gestión de contenidos
 1. **Investigación Profesional:** Utiliza el comando `npx contgenerator analyze "keyword"` para obtener datos de Google Autocomplete, Intención de Búsqueda y Dificultad basada en SERP (Scraping gratuito).
 2. **NotebookLM Check:** Cruza las tendencias con el Notebook asociado (ID: `{{NOTEBOOK_ID}}`) usando `notebook_query`.
 3. **Análisis de Competencia:** Revisa los reportes JSON generados en `docs/analysis-*.json` para entender qué está posicionando y cómo superarlo.
-4. **Propuesta:** Crea un archivo llamado `docs/content-plan-[DATE].md` basándote en el template de `content-plan-template.md`.
-5. **🛑 STOP:** Presenta las propuestas al usuario y espera aprobación explícita.
+4. **Búsqueda de Fuentes de Autoridad:** Investiga 2-3 fuentes de alta autoridad (sitios .edu, .gov, wikipedia, periódicos o revistas reconocidas) sobre el tema propuesto y guárdalas para incluirlas en la propuesta.
+5. **Propuesta:** Crea un archivo llamado `docs/content-plan-[DATE].md` basándote en el template de `content-plan-template.md`.
+6. **🛑 STOP:** Presenta las propuestas al usuario y espera aprobación explícita.
 
 ---
 
@@ -23,7 +24,7 @@ Para iniciar la misión, escribe: `"Ejecuta la misión de gestión de contenidos
 
 Para cada artículo aprobado en el plan:
 1. **Extracción LSI:** Genera una lista de 15 a 20 palabras clave secundarias (LSI/NLP) que deben estar presentes en el texto de forma natural.
-2. **Redacción y Frontmatter:** Crea el archivo en el directorio correspondiente (`{{CONTENT_DIR}}/[categoria]/slug-del-articulo.md`). 
+2. **Redacción y Frontmatter:** Crea el archivo en el directorio correspondiente (`{{CONTENT_DIR}}/[categoria]/slug-del-articulo.md`). **CRÍTICO:** Las URLs de las fuentes de autoridad investigadas deben incluirse EXCLUSIVAMENTE en el campo `sources` (como un array) dentro del YAML Frontmatter. **No** coloques enlaces a fuentes externas dentro del cuerpo del Markdown para evitar fuga de tráfico.
 3. **Validación Autónoma:** Asegúrate de que los metadatos cumplen estrictamente con las longitudes para que el Parser no falle.
 
 ---
