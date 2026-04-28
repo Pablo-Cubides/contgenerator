@@ -14,7 +14,10 @@ const ArticleSchema = z.object({
   kd: z.number().optional(),
   intent: z.string().optional(),
   image: z.string().optional(),
-  sources: z.array(z.string().url()).optional()
+  sources: z.array(z.object({
+    title: z.string(),
+    url: z.string().url()
+  })).optional()
 });
 
 type ArticleData = z.infer<typeof ArticleSchema>;

@@ -81,21 +81,31 @@ export function scoreArticle(article: any): SeoScore {
   if (linkMatches.length >= 1) breakdown.internalLinks = 10;
   else suggestions.push("Añade al menos un enlace interno");
 
-  // 8. External Sources (10%) - E-E-A-T
-  if (sources.length >= 2) breakdown.externalSources = 10;
-  else if (sources.length === 1) breakdown.externalSources = 5;
-  else issues.push("Faltan fuentes de autoridad (E-E-A-T)");
+  // 8. External Sources (E-E-A-T) (10%)
+  if (sources.length >= 2) {
+    breakdown.externalSources = 10;
+  } else if (sources.length === 1) {
+    breakdown.externalSources = 5;
+    suggestions.push("Añade al menos dos fuentes de autoridad para mejorar el E-E-A-T");
+  } else {
+    issues.push("Faltan fuentes de autoridad (E-E-A-T)");
+  }
 
-  // 8. Readability (15%)
+  // Bonus: Authority Domains check
+  const authorityDomains = ['.gov', '.edu', '.org', 'wikipedia.org', 'pubmed', 'mayoclinic', 'psychologytoday'];
+  const hasHighAuthority = sources.some((s: any) => 
+    authorityDomains.some(domain => s.url.toLowerCase().includes(domain))
+  );
+  if (hasHighAuthority && breakdown.externalSources > 0) {
+    // We can't exceed 10 in breakdown, but we can ensure it stays at 10 or add a small bonus to total if needed.
+    // For now, let's just make sure it hits the max.
+    breakdown.externalSources = 10;
+  }
+
+  // 9. Readability (15%)
   const read = calculateReadability(content);
   breakdown.readability = Math.round((read.score / 100) * 15);
   if (read.score < 50) issues.push(`Legibilidad baja (${read.score}): ${read.level}`);
-
-  // 9. External Sources (E-E-A-T) (10%)
-  const sources = article.sources || [];
-  if (sources.length >= 2) breakdown.externalSources = 10;
-  else if (sources.length === 1) breakdown.externalSources = 5;
-  else issues.push("Faltan fuentes de autoridad (E-E-A-T)");
 
   // Calculate Total
   const total = Object.values(breakdown).reduce((a, b) => a + b, 0);
